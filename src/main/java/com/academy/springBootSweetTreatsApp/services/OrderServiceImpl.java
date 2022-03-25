@@ -1,6 +1,7 @@
 package com.academy.springBootSweetTreatsApp.services;
 
 import com.academy.springBootSweetTreatsApp.models.Order;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
     List<Order> orderList = new ArrayList<>();
 

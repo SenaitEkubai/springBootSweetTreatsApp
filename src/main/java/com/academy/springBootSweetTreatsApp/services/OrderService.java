@@ -1,6 +1,5 @@
 package com.academy.springBootSweetTreatsApp.services;
 
-import com.academy.springBootSweetTreatsApp.models.Courier;
 import com.academy.springBootSweetTreatsApp.models.Order;
 
 import java.util.List;

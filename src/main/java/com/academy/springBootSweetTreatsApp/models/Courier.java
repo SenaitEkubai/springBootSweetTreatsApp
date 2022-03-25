@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Data
-@Setter
-@Getter
 public class Courier {
     private UUID id;
     private String name;

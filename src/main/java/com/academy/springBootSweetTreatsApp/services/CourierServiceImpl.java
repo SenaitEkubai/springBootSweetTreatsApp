@@ -2,11 +2,13 @@ package com.academy.springBootSweetTreatsApp.services;
 
 import com.academy.springBootSweetTreatsApp.exceptions.CourierNotFound;
 import com.academy.springBootSweetTreatsApp.models.Courier;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@AllArgsConstructor
 public class CourierServiceImpl implements CourierService {
     List<Courier> courierList = new ArrayList<>();
 
