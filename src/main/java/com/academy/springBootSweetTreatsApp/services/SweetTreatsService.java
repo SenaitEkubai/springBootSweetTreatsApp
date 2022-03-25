@@ -7,5 +7,6 @@ import java.util.UUID;
 
 public interface SweetTreatsService {
     List<Courier> suitableCouriers(UUID id);
+
     Courier cheapestCourier(UUID id);
 }

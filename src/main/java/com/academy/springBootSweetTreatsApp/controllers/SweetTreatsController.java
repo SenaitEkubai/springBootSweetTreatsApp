@@ -14,14 +14,17 @@ public class SweetTreatsController {
     @Autowired
     SweetTreatsService sweetTreatsService;
 
-    // get suitable couriers for an order
-    @RequestMapping(path = "/suitableCouriers/{id}")
+    // get suitable couriers for an order by passing an order id
+
+    @RequestMapping(path = "couriers/suitableCouriers/{id}")
     List<Courier> getSuitableCouriers(@PathVariable("id") UUID id) {
         return sweetTreatsService.suitableCouriers(id);
 
     }
-    // get the cheapest courier for an order
-    @RequestMapping(path = "/cheapest/{id}")
+
+    // get the cheapest courier for an order by passing order id
+
+    @RequestMapping(path = "couriers/cheapest/{id}")
     Courier getCheapestCourier(@PathVariable("id") UUID id) {
         return sweetTreatsService.cheapestCourier(id);
 

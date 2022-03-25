@@ -5,7 +5,6 @@ import com.academy.springBootSweetTreatsApp.models.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -20,9 +19,8 @@ public class SweetTreatsServiceImpl implements SweetTreatsService {
 
     @Override
     public List<Courier> suitableCouriers(UUID orderId) {
-        List<Courier> suitableCouriers = new ArrayList<>();
+        List<Courier> suitableCouriers;
         Order order = orderService.getOneOrder(orderId);
-        System.out.println(order);
         suitableCouriers = courierService.getCouriers().stream()
                 .filter(courier -> order.getDeliveryTime().isAfter(courier.getShiftStart()) && order.getDeliveryTime().isBefore(courier.getShiftEnd()))
                 .filter(courier -> order.getDistanceInMiles() <= courier.getDistanceInMiles())

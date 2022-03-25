@@ -11,11 +11,11 @@ public interface OrderService {
 
     void createOrder(Order order);
 
+    List<Order> getOrders();
+
+    Order getOneOrder(UUID id);
+
     void editOrder();
 
     void deleteOrder();
-
-   List<Order> getOrders();
-
-   Order getOneOrder(UUID id);
 }

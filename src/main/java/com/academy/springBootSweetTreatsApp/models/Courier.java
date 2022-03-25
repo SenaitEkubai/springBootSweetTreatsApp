@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import java.util.UUID;
 
 @Data
@@ -23,9 +22,8 @@ public class Courier {
     private boolean preferred;
 
 
-    public Courier( String name, String shiftStart, String shiftEnd, int distanceInMiles, boolean refrigerated, double chargePerMile, boolean preferred) {
-        //Random rand = new Random();
-        this.id= UUID.randomUUID();
+    public Courier(String name, String shiftStart, String shiftEnd, int distanceInMiles, boolean refrigerated, double chargePerMile, boolean preferred) {
+        this.id = UUID.randomUUID();
         this.name = name;
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
         LocalTime start = LocalTime.parse(shiftStart, formatter);

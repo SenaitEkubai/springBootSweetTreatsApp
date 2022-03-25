@@ -15,22 +15,23 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-
     // get order
+
     @RequestMapping(path = "/orders")
     List<Order> getOrders() {
         return orderService.getOrders();
     }
 
-
     // get one order by id
+
     @RequestMapping(path = "/orders/{id}")
     Order getOneOrder(@PathVariable("id") UUID id) {
         return orderService.getOneOrder(id);
     }
 
-    // create order
-    @PostMapping(path = "/addOrder")
+    // add order
+
+    @PostMapping(path = "/orders/addorder")
     ResponseEntity<String> createOrder(@RequestBody Order order) {
         orderService.createOrder(order);
         return new ResponseEntity<>("order created successfully", HttpStatus.OK);
