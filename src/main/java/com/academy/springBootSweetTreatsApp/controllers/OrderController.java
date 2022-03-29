@@ -1,9 +1,7 @@
 package com.academy.springBootSweetTreatsApp.controllers;
-
 import com.academy.springBootSweetTreatsApp.models.Order;
 import com.academy.springBootSweetTreatsApp.services.OrderService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -30,8 +30,8 @@ public class CourierServiceImpl implements CourierService {
     @Override
     public Courier getOneCourier(UUID id) {
         Courier courier = null;
-        if (courierList.isEmpty())
-            throw new CourierNotFound("couriers list is empty " + id);
+       /* if (courierList.isEmpty())
+            throw new CourierNotFound("no couriers found");*/
 
         for (int i = 0; i < courierList.size(); i++) {
 

@@ -17,15 +17,17 @@ import java.util.UUID;
 public class CourierController {
     @Autowired
     CourierService courierService;
-    // get all couriers endpoint
+
+    // all couriers
 
     @RequestMapping(path = "/")
     List<Courier> getAllCouriers() {
+
         return courierService.getCouriers();
     }
 
 
-    //  create one courier endpoint
+    //  create one courier
 
     @PostMapping(path = "/addcourier")
     ResponseEntity<String> addOneCourier(@RequestBody Courier courier) {
@@ -38,7 +40,7 @@ public class CourierController {
     @PostMapping(path = "/addcouriers")
     ResponseEntity<String> addManyCouriers(@RequestBody List<Courier> couriers) {
         courierService.createManyCouriers(couriers);
-        return new ResponseEntity<>("Couriers are added successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Couriers added successfully", HttpStatus.OK);
     }
 
 
