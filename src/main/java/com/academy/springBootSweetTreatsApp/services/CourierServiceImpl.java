@@ -2,7 +2,9 @@ package com.academy.springBootSweetTreatsApp.services;
 
 import com.academy.springBootSweetTreatsApp.exceptions.CourierNotFound;
 import com.academy.springBootSweetTreatsApp.models.Courier;
+import com.academy.springBootSweetTreatsApp.repository.CourierRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,7 +12,15 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class CourierServiceImpl implements CourierService {
-    List<Courier> courierList = new ArrayList<>();
+    @Autowired
+    private final CourierRepository courierRepository;
+
+    public int addCourier(Courier courier){
+        return courierRepository.insertCourier(courier);
+    }
+
+    // to be removed later
+    List<Courier> courierList;
 
     @Override
     public void createACourier(Courier courier) {
@@ -24,14 +34,12 @@ public class CourierServiceImpl implements CourierService {
 
     @Override
     public List<Courier> getCouriers() {
-        return courierList;
+        return courierRepository.getAllCouriers();
     }
 
     @Override
     public Courier getOneCourier(UUID id) {
         Courier courier = null;
-       /* if (courierList.isEmpty())
-            throw new CourierNotFound("no couriers found");*/
 
         for (int i = 0; i < courierList.size(); i++) {
 
@@ -40,6 +48,8 @@ public class CourierServiceImpl implements CourierService {
             }
 
         }
+        if (courier==null)
+            throw new CourierNotFound("no couriers found");
 
         return courier;
     }
