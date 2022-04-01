@@ -1,5 +1,6 @@
 package com.academy.springBootSweetTreatsApp.services;
 
+import com.academy.springBootSweetTreatsApp.exceptions.CourierNotFound;
 import com.academy.springBootSweetTreatsApp.models.Courier;
 import com.academy.springBootSweetTreatsApp.models.Order;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class SweetTreatsServiceImpl implements SweetTreatsService {
 
     @Override
     public List<Courier> suitableCouriers(UUID orderId) {
-        List<Courier> suitableCouriers;
+        List<Courier> suitableCouriers = null;
         Order order = orderService.getOneOrder(orderId);
         suitableCouriers = courierService.getCouriers().stream()
                 .filter(courier -> order.getDeliveryTime().isAfter(courier.getShiftStart()) && order.getDeliveryTime().isBefore(courier.getShiftEnd()))
@@ -29,8 +30,6 @@ public class SweetTreatsServiceImpl implements SweetTreatsService {
                 .filter(courier -> courier.isRefrigerated() == order.isRequireRefrigeration())
                 .sorted(Comparator.comparingDouble(Courier::getChargePerMile))
                 .collect(Collectors.toList());
-
-
         return suitableCouriers;
     }
 
@@ -38,6 +37,9 @@ public class SweetTreatsServiceImpl implements SweetTreatsService {
     public Courier cheapestCourier(UUID id) {
         Order order = orderService.getOneOrder(id);
         List<Courier> suitableCouriers = suitableCouriers(id);
+        if(suitableCouriers.isEmpty())
+            throw new CourierNotFound("no courier found");
+
         List<Courier> sortedSuitableList = suitableCouriers.stream()
                 .sorted((Courier courier1, Courier courier2) -> {
                     if (courier1.isPreferred() && courier1.getChargePerMile() * order.getDistanceInMiles() - courier2.getChargePerMile() * order.getDistanceInMiles() <= 1) {

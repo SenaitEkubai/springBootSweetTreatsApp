@@ -1,5 +1,6 @@
 package com.academy.springBootSweetTreatsApp.services;
 
+import com.academy.springBootSweetTreatsApp.exceptions.OrderNotFound;
 import com.academy.springBootSweetTreatsApp.models.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    List<Order> orderList = new ArrayList<>();
+    List<Order> orderList;
 
     @Override
     public void createOrder(Order order) {
@@ -20,6 +21,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrders() {
+        if(orderList.isEmpty())
+            throw new OrderNotFound("order not found");
         return orderList;
     }
 
@@ -31,6 +34,8 @@ public class OrderServiceImpl implements OrderService {
                 order = orderList.get(i);
 
         }
+        if(order==null)
+            throw new  OrderNotFound("order not found");
         return order;
     }
 
