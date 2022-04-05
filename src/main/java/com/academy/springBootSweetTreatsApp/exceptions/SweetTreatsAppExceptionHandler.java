@@ -19,7 +19,7 @@ public class SweetTreatsAppExceptionHandler extends ResponseEntityExceptionHandl
     @ExceptionHandler(NoCouriersFound.class)
     public ResponseEntity<Object> noCouriersFoundHandler(NoCouriersFound e, WebRequest request){
 
-        return new ResponseEntity<Object>(new ApiErrorMessage("no couriers", HttpStatus.NOT_FOUND, LocalDateTime.now()),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(new ApiErrorMessage("no couriers found", HttpStatus.NOT_FOUND, LocalDateTime.now()),HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(OrderNotFound.class)
     public ResponseEntity<Object> noOrderFoundHandler(OrderNotFound e, WebRequest request){
