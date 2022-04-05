@@ -1,6 +1,8 @@
 package com.academy.springBootSweetTreatsApp.services;
 
 import com.academy.springBootSweetTreatsApp.exceptions.CourierNotFound;
+import com.academy.springBootSweetTreatsApp.exceptions.NoCouriersFound;
+import com.academy.springBootSweetTreatsApp.exceptions.OrderNotFound;
 import com.academy.springBootSweetTreatsApp.models.Courier;
 import com.academy.springBootSweetTreatsApp.repository.CourierRepository;
 import lombok.AllArgsConstructor;
@@ -12,46 +14,35 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class CourierServiceImpl implements CourierService {
+
     @Autowired
-    private final CourierRepository courierRepository;
-
-    public int addCourier(Courier courier){
-        return courierRepository.insertCourier(courier);
-    }
-
-    // to be removed later
-    List<Courier> courierList;
+    public CourierRepository courierRepository;
 
     @Override
     public void createACourier(Courier courier) {
-        courierList.add(courier);
+        courierRepository.insert(courier);
     }
 
     @Override
-    public void createManyCouriers(List<Courier> couriers) {
-        courierList.addAll(couriers);
+    public void deleteCourier(String id) {
+        courierRepository.deleteById(id);
+
+    }
+
+    public Optional<Courier> getCourierById(String id) {
+        return courierRepository.findById(id);
     }
 
     @Override
     public List<Courier> getCouriers() {
-        return courierRepository.getAllCouriers();
+        if(courierRepository.count()==0)
+            throw new NoCouriersFound("No couriers found");
+        return courierRepository.findAll();
     }
 
     @Override
-    public Courier getOneCourier(UUID id) {
-        Courier courier = null;
-
-        for (int i = 0; i < courierList.size(); i++) {
-
-            if (courierList.get(i).getId().equals(id)) {
-                courier = courierList.get(i);
-            }
-
-        }
-        if (courier==null)
-            throw new CourierNotFound("no couriers found");
-
-        return courier;
+    public void createManyCouriers(List<Courier> couriers) {
+        courierRepository.insert(couriers);
     }
 
     @Override
@@ -59,9 +50,5 @@ public class CourierServiceImpl implements CourierService {
 
     }
 
-    @Override
-    public void deleteCourier() {
-
-    }
 
 }

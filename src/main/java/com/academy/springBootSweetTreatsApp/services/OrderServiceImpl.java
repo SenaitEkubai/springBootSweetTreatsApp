@@ -2,41 +2,39 @@ package com.academy.springBootSweetTreatsApp.services;
 
 import com.academy.springBootSweetTreatsApp.exceptions.OrderNotFound;
 import com.academy.springBootSweetTreatsApp.models.Order;
+
+import com.academy.springBootSweetTreatsApp.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    List<Order> orderList;
+    @Autowired
+    OrderRepository orderRepository;
 
     @Override
     public void createOrder(Order order) {
-        orderList.add(order);
+        orderRepository.insert(order);
     }
 
     @Override
     public List<Order> getOrders() {
-        if(orderList.isEmpty())
+
+        if(orderRepository.count()==0)
             throw new OrderNotFound("order not found");
-        return orderList;
+
+        return orderRepository.findAll();
     }
 
     @Override
-    public Order getOneOrder(UUID id) {
-        Order order = null;
-        for (int i = 0; i < orderList.size(); i++) {
-            if (orderList.get(i).getId().equals(id))
-                order = orderList.get(i);
-
-        }
-        if(order==null)
-            throw new  OrderNotFound("order not found");
-        return order;
+    public Optional<Order> getOneOrder(String id) {
+        return orderRepository.findById(id);
     }
 
     @Override
@@ -45,8 +43,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder() {
-
+    public void deleteOrder(String id) {
+        orderRepository.deleteById(id);
     }
 
 
