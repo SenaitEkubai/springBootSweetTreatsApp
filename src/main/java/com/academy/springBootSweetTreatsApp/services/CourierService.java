@@ -14,10 +14,7 @@ public interface CourierService {
 
     List<Courier> getCouriers();
 
-    Courier getOneCourier(UUID id);
-
     void editCourier();
 
-    void deleteCourier();
-
+    void deleteCourier(String id);
 }

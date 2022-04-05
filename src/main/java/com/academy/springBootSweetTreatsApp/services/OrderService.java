@@ -3,7 +3,7 @@ package com.academy.springBootSweetTreatsApp.services;
 import com.academy.springBootSweetTreatsApp.models.Order;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -12,9 +12,9 @@ public interface OrderService {
 
     List<Order> getOrders();
 
-    Order getOneOrder(UUID id);
+    Optional<Order> getOneOrder(String id);
 
     void editOrder();
 
-    void deleteOrder();
+    void deleteOrder(String id);
 }
