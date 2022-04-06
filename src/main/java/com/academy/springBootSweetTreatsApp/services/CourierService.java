@@ -4,6 +4,7 @@ import com.academy.springBootSweetTreatsApp.models.Courier;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -14,7 +15,7 @@ public interface CourierService {
 
     List<Courier> getCouriers();
 
-    void editCourier();
-
+    void editCourier(String id,Courier courier);
+    Optional<Courier> getCourierById(String id);
     void deleteCourier(String id);
 }

@@ -33,13 +33,13 @@ public class CourierController {
     @PostMapping(path = "couriers/addcourier")
     ResponseEntity<String> addOneCourier(@RequestBody Courier courier) {
         courierService.createACourier(courier);
-        return new ResponseEntity<>("Courier is added successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Courier is added successfully", HttpStatus.CREATED);
     }
 
     @PostMapping(path = "couriers/addcouriers")
     ResponseEntity<?> addManyCouriers(@RequestBody List<Courier> couriers) {
         courierService.createManyCouriers(couriers);
-        return new ResponseEntity<>("Couriers added successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Couriers added successfully", HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "couriers/{id}")
@@ -48,8 +48,9 @@ public class CourierController {
     }
 
     @DeleteMapping(path = "couriers/{id}")
-    void deleteOneCourierById(@PathVariable("id") String id) {
+    ResponseEntity<?> deleteOneCourierById(@PathVariable("id") String id) {
         courierService.deleteCourier(id);
+        return new ResponseEntity<>("Courier deleted successfully",HttpStatus.OK);
     }
 
 

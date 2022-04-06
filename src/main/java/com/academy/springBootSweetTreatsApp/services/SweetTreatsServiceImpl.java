@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,8 +44,8 @@ public class SweetTreatsServiceImpl implements SweetTreatsService {
 
     @Override
     public Courier cheapestCourier(Order order) {
-       List<Courier> suitableCouriers = suitableCouriers(order);
-        if(suitableCouriers.isEmpty())
+        List<Courier> suitableCouriers = suitableCouriers(order);
+        if (suitableCouriers.isEmpty())
             throw new CourierNotFound("no courier found");
 
         List<Courier> sortedSuitableList = suitableCouriers.stream()

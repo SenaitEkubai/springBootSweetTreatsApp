@@ -1,8 +1,6 @@
 package com.academy.springBootSweetTreatsApp.services;
 
-import com.academy.springBootSweetTreatsApp.exceptions.CourierNotFound;
 import com.academy.springBootSweetTreatsApp.exceptions.NoCouriersFound;
-import com.academy.springBootSweetTreatsApp.exceptions.OrderNotFound;
 import com.academy.springBootSweetTreatsApp.models.Courier;
 import com.academy.springBootSweetTreatsApp.repository.CourierRepository;
 import lombok.AllArgsConstructor;
@@ -29,13 +27,14 @@ public class CourierServiceImpl implements CourierService {
 
     }
 
+    @Override
     public Optional<Courier> getCourierById(String id) {
         return courierRepository.findById(id);
     }
 
     @Override
     public List<Courier> getCouriers() {
-        if(courierRepository.count()==0)
+        if (courierRepository.count() == 0)
             throw new NoCouriersFound("No couriers found");
         return courierRepository.findAll();
     }
@@ -46,9 +45,8 @@ public class CourierServiceImpl implements CourierService {
     }
 
     @Override
-    public void editCourier() {
+    public void editCourier(String id, Courier courier) {
 
     }
-
 
 }
